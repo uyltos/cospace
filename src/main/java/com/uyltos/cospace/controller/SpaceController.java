@@ -17,13 +17,11 @@ public class SpaceController {
 
     @PostMapping
     public ResponseEntity<Space> createSpace(@RequestBody Space space) {
-        Space savedSpace = spaceService.createSpace(space);
-        return ResponseEntity.ok(savedSpace);
+        return ResponseEntity.ok(spaceService.createSpace(space));
     }
 
     @GetMapping
     public ResponseEntity<List<Space>> getAllSpaces() {
-        List<Space> spaces = spaceService.getAllSpaces();
-        return ResponseEntity.ok(spaces);
+        return ResponseEntity.ok(spaceService.getAllSpaces());
     }
 }

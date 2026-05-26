@@ -11,11 +11,11 @@ import java.util.List;
 public interface BookingRepository extends JpaRepository<Booking, Long> {
 
     @Query(value = """
-            SELECT EXISTS (
-            SELECT 1 FROM booking
-            WHERE space_id = :spaceId AND start_time < :endTime AND end_time > :startTime
-            )
-           """, nativeQuery = true)
+             SELECT EXISTS (
+             SELECT 1 FROM booking
+             WHERE space_id = :spaceId AND start_time < :endTime AND end_time > :startTime
+             )
+            """, nativeQuery = true)
     boolean isBusy(@Param("spaceId") Long spaceId,
                    @Param("startTime") LocalDateTime startTime,
                    @Param("endTime") LocalDateTime endTime);

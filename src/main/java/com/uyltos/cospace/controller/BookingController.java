@@ -17,14 +17,12 @@ public class BookingController {
 
     @PostMapping
     public ResponseEntity<Booking> createBooking(@RequestBody Booking booking) {
-        Booking savedBooking = bookingService.createBooking(booking);
-        return ResponseEntity.ok(savedBooking);
+        return ResponseEntity.ok(bookingService.createBooking(booking));
     }
 
     @GetMapping("/user/{userId}")
     public ResponseEntity<List<Booking>> getBookingsUserId(@PathVariable Long userId) {
-        List<Booking> bookings = bookingService.getBookingsUserId(userId);
-        return ResponseEntity.ok(bookings);
+        return ResponseEntity.ok(bookingService.getBookingsUserId(userId));
     }
 
     @DeleteMapping("/{bookingId}")
@@ -35,7 +33,6 @@ public class BookingController {
 
     @PutMapping("/{bookingId}")
     public ResponseEntity<Booking> updateBooking(@PathVariable Long bookingId, @RequestBody Booking newBookingData) {
-        Booking savedNewBooking = bookingService.updateBooking(bookingId, newBookingData);
-        return ResponseEntity.ok(savedNewBooking);
+        return ResponseEntity.ok(bookingService.updateBooking(bookingId, newBookingData));
     }
 }

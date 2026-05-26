@@ -11,7 +11,9 @@ import lombok.Data;
 public class Space {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) private Long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     private String name;
     private Integer capacity;
     private Double area;

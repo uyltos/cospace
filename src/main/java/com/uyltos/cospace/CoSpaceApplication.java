@@ -6,8 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class CoSpaceApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(CoSpaceApplication.class, args);
-	}
-
+    public static void main(String[] args) {
+        SpringApplication.run(CoSpaceApplication.class, args);
+    }
 }
