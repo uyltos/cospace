@@ -8,11 +8,13 @@ import com.uyltos.cospace.repository.SpaceRepository;
 import com.uyltos.cospace.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class BookingService {
 
     private final UserRepository userRepository;
@@ -23,16 +25,18 @@ public class BookingService {
         userRepository.findById(booking.getUser().getId()).orElseThrow(
                 () -> new ResourceNotFoundException("Пользователь с таким ID не найден!"));
 
-        spaceRepository.findById(booking.getSpace().getId()).orElseThrow(
+        long spaceId = booking.getSpace().getId();
+        spaceRepository.findById(spaceId).orElseThrow(
                 () -> new ResourceNotFoundException("Рабочее место с таким ID не найдено!"));
 
-        if (bookingRepository.isBusy(booking.getSpace().getId(), booking.getStartTime(), booking.getEndTime())) {
+        if (bookingRepository.isBusy(spaceId, booking.getStartTime(), booking.getEndTime())) {
             throw new BookingConflictException("Это рабочее место уже занято на выбранное время!");
         }
 
         return bookingRepository.save(booking);
     }
 
+    @Transactional(readOnly = true)
     public List<Booking> getBookingsUserId(Long userId) {
         if (!userRepository.existsById(userId)) {
             throw new ResourceNotFoundException("Пользователь с таким ID не найден!");

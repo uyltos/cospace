@@ -4,11 +4,13 @@ import com.uyltos.cospace.model.Space;
 import com.uyltos.cospace.repository.SpaceRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class SpaceService {
 
     private final SpaceRepository spaceRepository;
@@ -17,6 +19,7 @@ public class SpaceService {
         return spaceRepository.save(space);
     }
 
+    @Transactional(readOnly = true)
     public List<Space> getAllSpaces() {
         return spaceRepository.findAll();
     }
